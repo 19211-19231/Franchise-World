@@ -1,0 +1,60 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>To check if you are not a robot</title>  
+    <script type="text/javascript">  
+        /* Function to Generat Captcha */  
+        function GenerateCaptcha() 
+       {  
+            var chr1 = Math.ceil(Math.random() * 10) + '';  
+            var chr2 = Math.ceil(Math.random() * 10) + '';  
+            var chr3 = Math.ceil(Math.random() * 10) + '';  
+            var str = new Array(4).join().replace(/(.|$)/g, function () { return ((Math.random() * 36) | 0).toString(36)[Math.random() < .5 ? "toString" :                          "toUpperCase"](); });  
+            var captchaCode = str + chr1 + ' ' + chr2 + ' ' + chr3;  
+            document.getElementById("txtCaptcha").value = captchaCode; 
+        }  
+  
+        /* Validating Captcha Function */  
+        function ValidCaptcha() {  
+            var str1 = removeSpaces(document.getElementById('txtCaptcha').value);  
+            var str2 = removeSpaces(document.getElementById('txtCompare').value);  
+            
+		if(str1==str2) {
+		location = "marvelpage.html";
+		return true
+		}
+		else{
+			return false;
+		} 
+        }  
+  
+        /* Remove spaces from Captcha Code */  
+        function removeSpaces(string) {  
+            return string.split(' ').join('');  
+        }  
+    </script>  
+  <style>
+	body
+	{
+		background-image: url('captcha.jpg');
+}
+	div{
+		Background-color: rgba(0,0,0,0.7);
+		color: white
+}
+</style>
+</head>  
+<body onload="GenerateCaptcha();">  
+    <div style="border: 2px solid gray; width: 700px;margin: 250px;height: 200px">  
+        <h2 style="text-align: center;">Confirm U are not a Robot</h2>  
+  
+        Enter the Captcha Text:  
+        <input type="text" id="txtCompare" />
+        <input type="text" id="txtCaptcha" style="text-align: center; border: none; font-weight: bold; font-size: 30px; font-family: Matura MT Script Capitals;padding: 25px;background: transparent;color: white" readonly/>  
+        <input id="btnValid" type="button" value="Check" onclick="alert(ValidCaptcha());" />  
+  
+        <br />  
+        <br />  
+    </div>  
+</body>  
+</html>  
